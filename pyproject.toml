@@ -1,0 +1,31 @@
+[project]
+name = "apple-to-openai"
+version = "0.1.0"
+description = "OpenAI-compatible API server for Apple Intelligence on-device Foundation Models"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "apple-fm-sdk",
+    "pydantic-settings>=2.0.0",
+]
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+apple-fm-sdk = { path = "../python-apple-fm-sdk", editable = true }
+
+[project.scripts]
+apple-to-openai = "server:cli"
+
+[dependency-groups]
+dev = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["server.py", "__main__.py"]
